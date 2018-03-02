@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class IconButton: UIView {
+class IconButton: UIControl {
 
     /*
     // Only override draw() if you perform custom drawing.
@@ -94,7 +94,20 @@ class IconButton: UIView {
         )
         
         layer.cornerRadius = 10
+        addTapGestureRecognizer()
     }
 
 
 }
+
+extension IconButton {
+    fileprivate func addTapGestureRecognizer() {
+        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(handleIconButtonTapped(sender:)))
+        addGestureRecognizer(tapGestureRecogniser)
+    }
+    
+    @objc func handleIconButtonTapped(sender: UITapGestureRecognizer) {
+        sendActions(for: .touchUpInside)
+    }
+}
+
